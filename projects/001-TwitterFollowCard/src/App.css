@@ -1,3 +1,14 @@
+.App{
+  border: 1.5px solid rgb(153, 153, 153);
+  min-width: 348px;
+  padding: 1rem;
+  border-radius: 25px;
+}
+.tw-followCard-title h2{
+  color: white;
+  margin-top: 0;
+}
+
 .tw-followCard {
   display: flex;
   align-items: center;
