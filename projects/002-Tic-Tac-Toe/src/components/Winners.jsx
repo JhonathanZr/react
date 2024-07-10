@@ -21,3 +21,4 @@ export function WinnerModal ({ winner, resetGame }) {
     </section>
     )
 }
+
