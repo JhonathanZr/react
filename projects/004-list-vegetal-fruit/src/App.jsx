@@ -1,87 +1,106 @@
-import { useState } from 'react'
 import './App.css'
 
 const PRODUCTS = [
   { category: "Frutas", price: "$1", stocked: true, name: "Manzana" },
   { category: "Frutas", price: "$1", stocked: true, name: "Fruta del dragón" },
-  { category: "Frutas", price: "$2", stocked: false, name: "Maracuyá" },
-  { category: "Verduras", price: "$2", stocked: true, name: "Espinaca" },
   { category: "Verduras", price: "$4", stocked: false, name: "Calabaza" },
-  { category: "Verduras", price: "$1", stocked: true, name: "Guisantes" }
+  { category: "Verduras", price: "$1", stocked: true, name: "Guisantes" },
+  { category: "Frutas", price: "$2", stocked: false, name: "Maracuyá" },
+  { category: "Verduras", price: "$2", stocked: true, name: "Espinaca" }
 ]
-const SearchBar = ()=>{
-  return (
-    <span>
-      <input placeholder='buscar'></input>
-      <input type='checkbox'/>
-      <p>Mostrar productos existentes</p>
-  </span>
+
+function CategoryProductsRow ({category}){
+  return(
+    <tr>
+      <th className='colSpan2'>
+        {category}
+      </th>
+    </tr>
   )
 }
 
-const SelectFruit = () =>{
-  let listFruits = []
-    for (const fruits of PRODUCTS) {
-      const className = `${fruits.stocked ?  'is-stocked' : 'no-stocked'}`
-      if(fruits.category === "Frutas"){
-        listFruits.push(        
-        <tr key={fruits.name} className={className}>
-          <td>{fruits.name}</td>
-          <td>{fruits.price}</td>
-        </tr>)
-        }
-    }
-    return (listFruits)
+function ProductRow ({product}) {
+  return(
+  <tr className={product.stocked ? 'is-stocked' : 'no-stocked'}>
+      <td>{product.name}</td>
+      <td>{product.price}</td>
+  </tr>
+  )
 }
 
-const SelectVegetal = ()=>{
-  let listVegetal = []
-  for(const vegetals of PRODUCTS){
-    const className = `${vegetals.stocked ?  'is-stocked' : 'no-stocked'}`
-    if(vegetals.category === "Verduras"){
-      listVegetal.push(
-        <tr key={vegetals.name} className={className}>
-          <td>{vegetals.name}</td>
-          <td>{vegetals.price}</td>
-        </tr>
+
+function SearchBar () {
+  return (
+    <form>
+      <input type="text" placeholder='Buscar...'/>
+      <label>
+        <input type='checkbox'/>
+        {" "}
+        Mostrar solo productos en stock
+      </label>
+    </form>
+  )
+}
+
+
+function Order (a, b){
+  if (a.category < b.category) return -1;
+  if (a.category > b.category) return 1;
+}
+
+function ProductTable ({products}) {
+  const row = []
+  let lastCategory = []
+  products.sort(Order)
+
+
+  products.forEach(product => {
+    if(!lastCategory.find((element) => element === product.category)){
+      lastCategory.push(product.category)
+      row.push(
+      <CategoryProductsRow
+      category={product.category}
+      key={product.category}/>
       )
     }
-  } return(listVegetal)
-}
+    row.push(<ProductRow
+      product={product}
+      key = {product.name}/>)
+  });
 
-const Tablet = () =>{
-  return(
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Price</th>
-      </tr>
 
-      <tr>
-        <th>Fruits</th>
-      </tr>
-        <SelectFruit/>
-      <tr>
-        <th>Vegetal</th>
-      </tr>
-      <SelectVegetal/>
-    </thead>
+
+
+  return (
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          </tr>
+      </thead>
+      <tbody>
+          {row}
+      </tbody>
+    </table>
   )
 }
 
+function FilterTable ({products}){
+  return(
+    <div>
+      <SearchBar/>
+      <ProductTable
+      products={products}/>
+    </div>
+  )
+}
 
 function App() {
 
   return (
     <>
-      <div className='filter-tablet'>
-          <SearchBar/>
-          <table>
-            <Tablet/>
-          </table>
-      </div>
-    
-
+      <FilterTable products={PRODUCTS}/>
     </>
   )
 }

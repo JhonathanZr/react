@@ -8,5 +8,23 @@
 .filter-tablet{
   border: 1px white solid;
   padding: 10px;
-  width: 300px;
+  width: 250px;
+}
+
+.no-stocked{
+  color: red;
+}
+
+.table{
+  width: 100%;
+  text-align: left;
+}
+
+.title-products{
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.title-name-price{
+  font-size: 1.2rem;
 }
