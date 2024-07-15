@@ -22,9 +22,10 @@ const SearchBar = ()=>{
 const SelectFruit = () =>{
   let listFruits = []
     for (const fruits of PRODUCTS) {
+      const className = `${fruits.stocked ?  'is-stocked' : 'no-stocked'}`
       if(fruits.category === "Frutas"){
         listFruits.push(        
-        <tr key={fruits.name}>
+        <tr key={fruits.name} className={className}>
           <td>{fruits.name}</td>
           <td>{fruits.price}</td>
         </tr>)
@@ -36,9 +37,10 @@ const SelectFruit = () =>{
 const SelectVegetal = ()=>{
   let listVegetal = []
   for(const vegetals of PRODUCTS){
+    const className = `${vegetals.stocked ?  'is-stocked' : 'no-stocked'}`
     if(vegetals.category === "Verduras"){
       listVegetal.push(
-        <tr key={vegetals.name}>
+        <tr key={vegetals.name} className={className}>
           <td>{vegetals.name}</td>
           <td>{vegetals.price}</td>
         </tr>
