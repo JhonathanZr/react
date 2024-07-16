@@ -8,13 +8,19 @@ function FilterTable({ products }) {
   const [stock, setStock] = useState(true)
     const handleClick = () => {
         !stock ? setStock(true) : setStock(false)
-        console.log(stock)
     }
+  const [filterSearch, setFilterSearch] = useState("")
+
+
   return (
     <div>
       <SearchBar
-      handleClick = {handleClick}/>
+      handleClick = {handleClick}
+      setFilterSearch={setFilterSearch}/>
+
+      
       <ProductTable
+        filterSearch={filterSearch}
         products={products} 
         stock = {stock}/>
     </div>

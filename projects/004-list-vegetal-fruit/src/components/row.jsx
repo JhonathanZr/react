@@ -2,7 +2,7 @@ export function ProductRow({ product }) {
     return (
         <tr className={product.stocked ? 'is-stocked' : 'no-stocked'}>
             <td>{product.name}</td>
-            <td>{product.price}</td>
+            <td className="table-price">{product.price}</td>
         </tr>
     )
 }
@@ -17,13 +17,15 @@ export function CategoryProductsRow({ category }) {
     )
 }
 
-export function SearchBar({handleClick}) {
-    
+export function SearchBar({handleClick, stock, setFilterSearch}) {
+
     return (
-        <form>
-            <input type="text" placeholder='Buscar...' />
+        <form className="form-table">
+            <input type="text" placeholder='Buscar...' className="barSearch"
+            onChange={(e) => setFilterSearch(e.target.value)}/>
             <label>
-                <input type='checkbox' onClick={handleClick}/>
+                <input type='checkbox' checked={stock} onClick={handleClick} 
+                />
                 {" "}
                 Mostrar solo productos en stock
             </label>
@@ -35,8 +37,9 @@ function Order(a, b) {
     if (a.category > b.category) return 1;
 }
 
-export function ProductTable({ products, stock }) {
+export function ProductTable({ products, stock, filterSearch }) {
     const row = []
+    console.log(filterSearch)
     let lastCategory = []
     products.sort(Order)
         products.forEach(product => {
@@ -47,6 +50,9 @@ export function ProductTable({ products, stock }) {
                     category={product.category}
                     key={product.category} />
             )
+        }
+        if(product.name.toLowerCase().indexOf(filterSearch.toLowerCase()) === -1){
+            return
         }
         if(!stock && product.stocked === false){
             return
@@ -61,7 +67,7 @@ export function ProductTable({ products, stock }) {
     return (
         <table>
             <thead>
-                <tr>
+                <tr className="title-table">
                     <th>Name</th>
                     <th>Price</th>
                 </tr>

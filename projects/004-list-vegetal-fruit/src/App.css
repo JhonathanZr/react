@@ -1,8 +1,27 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.form-table{
+  display: flex;
+  flex-direction: column;
+  max-width: 200px;
+}
+
+.title-table th{
+  text-align: start;
+  font-size: 1.5rem;
+}
+
+.table-price{
   text-align: center;
+}
+
+.colSpan2{
+  text-align: start;
+  font-size: 1.5rem;
 }
 
 .filter-tablet{
@@ -15,16 +34,3 @@
   color: red;
 }
 
-.table{
-  width: 100%;
-  text-align: left;
-}
-
-.title-products{
-  font-size: 1.2rem;
-  text-align: center;
-}
-
-.title-name-price{
-  font-size: 1.2rem;
-}
