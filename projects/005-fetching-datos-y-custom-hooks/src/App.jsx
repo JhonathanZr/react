@@ -9,34 +9,39 @@ const API_PREFIX_CAT = `https://cataas.com`
 function App() {
   const [fact, setFact] = useState()
   const [imageURL, setImageURL] = useState("")
-  useEffect(() => {
+
+  const getRandomFact = () => {
     fetch(API_FACTS_CATS)
-      .then(res => res.json())
-      .then(data => {
-        const { fact } = data
-        setFact(fact)
-      })
-  }, [])
+    .then(res => res.json())
+    .then(data => {
+      const { fact } = data
+      setFact(fact)
+    })
+  }
+
+  useEffect(() => {getRandomFact()}, [])
 
   useEffect(() => {
     if (!fact) return
+    const wordToPrint = fact.split(' ', 2).join(' ')
 
-    const threeFirstWord = fact.split(' ', 3).join(' ')
-    console.log(threeFirstWord)
-
-    fetch(`https://cataas.com/cat/says/${threeFirstWord}?size=50&color=red&json=true`)
+    fetch(`https://cataas.com/cat/says/${wordToPrint}?json=true`)
       .then(res => res.json())
       .then(response => {
         const { _id } = response
-        const url = `${API_PREFIX_CAT}/cat/${_id}/says/${threeFirstWord}`
+        const url = `${API_PREFIX_CAT}/cat/${_id}/says/${wordToPrint}?fontSize=70&fontColor=red&`
         setImageURL(url)
       })
   }, [fact])
 
+  const handleClick = () =>{
+    getRandomFact()
+  }
   return (
     <>
       <section>
-        <h1>API de gatitos</h1>
+        <h1>Kitten API</h1>
+        <button onClick={handleClick}> Refresh </button>
         <span>
           {fact && <p>{fact}</p>}
         </span>
