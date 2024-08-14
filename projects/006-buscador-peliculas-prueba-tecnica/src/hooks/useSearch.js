@@ -1,10 +1,15 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 
 export function useSearch() {
     const [search, setSearch] = useState('')
     const [error, setError] = useState(null)
-
+    const validFirstSearch = useRef(true)
+    console.log(search)
     useEffect(() => {
+        if(validFirstSearch.current){
+            validFirstSearch.current = search === ''
+            return
+        }
         if (search === '') {
             setError('No has escrito nada aun')
             return

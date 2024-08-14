@@ -7,14 +7,12 @@ import { useSearch } from './hooks/useSearch';
 
 
 function App() {
-  const {movies} = useMovie()
-  const inputRef = useRef()
   const {error, search, setSearch} = useSearch()
+  const {movies, getMovies} = useMovie({search})
 
   const handleSubmit = (event) =>{
     event.preventDefault()
-    const value = inputRef.current.value
-    setSearch(value)
+    getMovies()
   }
 
   const handleChange = (event) => {
@@ -30,7 +28,7 @@ function App() {
       <h1>Buscador de películas</h1>
       <form className='form' onSubmit={handleSubmit} >
         <input onChange={handleChange} value={search} 
-        ref={inputRef} placeholder='Avengers, Star Wars, The Matrix...' />
+        placeholder='Avengers, Star Wars, The Matrix...' />
         <button type='submit'>Buscar</button>
       </form>
       {error && <p style={{color: 'red', textAlign: 'center'}}>{error}</p>}

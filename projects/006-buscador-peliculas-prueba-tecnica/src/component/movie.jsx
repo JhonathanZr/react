@@ -10,7 +10,7 @@ return(
         <li key={movie.id} className='contain-movie'>
             <h3 className='movie-title'>{movie.title}</h3>
             <img src={movie.poster} alt={movie.title}/>
-            <p className='release'>Release date: {movie.year}</p>
+            <p className='release'>{movie.year}</p>
         </li>
         ))
     }
