@@ -24,7 +24,7 @@ export function useMovie({ search, sort }) {
             }
     
         }
-    },[])
+    },[search])
 
     const sortMovies = useMemo(() =>{
         return sort 
