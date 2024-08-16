@@ -4,7 +4,6 @@ export function useSearch() {
     const [search, setSearch] = useState('')
     const [error, setError] = useState(null)
     const validFirstSearch = useRef(true)
-    console.log(search)
     useEffect(() => {
         if(validFirstSearch.current){
             validFirstSearch.current = search === ''

@@ -20,6 +20,7 @@ form{
 .box-container{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  margin-top: 50px;
 }
 
 .contain-movie{
@@ -47,4 +48,8 @@ form{
 
 li{
   list-style-type: none;
+}
+
+.loading{
+  text-align: center;
 }
