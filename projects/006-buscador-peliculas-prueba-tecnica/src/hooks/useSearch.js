@@ -23,6 +23,6 @@ export function useSearch() {
             setError(null)
             return
         }
-    })
+    },[search])
     return { search, setSearch, error }
 }
