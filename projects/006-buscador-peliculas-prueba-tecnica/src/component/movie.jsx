@@ -1,7 +1,3 @@
-import noResponse from '../response/no-response.json';
-
-const HasError = noResponse.Error
-
 function ResultMovie ({movies}) {
 return(
     <ul className='box-container'>
@@ -19,7 +15,7 @@ return(
 
 function NoMoviesResults () {
 return (
-    <p>{HasError}</p>
+    <p></p>
 )
 }
 
