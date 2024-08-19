@@ -1,6 +1,7 @@
 import {AddToCartIcon} from './icons'
 
 export function ListProducts ({data}) {
+    
     return(
         <main>
             <ul>

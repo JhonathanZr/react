@@ -1,22 +1,25 @@
 import { useState, useEffect } from "react"
 
-const URL_PRODUCTS = 'https://api.escuelajs.co/api/v1/products?offset=1&limit=20'
+const URL_PRODUCTS = 'https://api.escuelajs.co/api/v1/products'
 
-export  function fetchProducts () {
-    const [data, setData] = useState(null)
-    useEffect(()=>{
-        console.log("hola")
-            fetch(URL_PRODUCTS)
-                .then(res => res.json())
-                .then(data =>                     
-                    setData(data?.map(products=>({
-                        id: products.id,
-                        price: products.price,
-                        name: products.title,
-                        image: products.images[0],
-                        category: products.category.name,
-                        description: products.description
-                    }))))
-    },[])    
-    return {data, setData}
+export const fetchProducts = async () => {
+        try {
+            const response = await fetch(URL_PRODUCTS)
+            const dataJSON = await response.json()
+            const produtcs = dataJSON
+            const listProducts = produtcs?.map(product => ({
+                id: product.id,
+                price: product.price,
+                name: product.title,
+                image: product.images[0],
+                category: product.category.name,
+                description: product.description,
+            }));
+            const category = [...new Set(listProducts.map(producto => 
+                producto.category))];
+
+            return {listProducts, category}
+        } catch (error) {
+            return console.log('error')
+        }
 }
