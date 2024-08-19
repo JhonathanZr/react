@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { ListProducts } from './components/products'
 import { fetchProducts } from './services/getProducts'
 import { Header } from './components/header'
+import { filterProducts } from './components/Filtered'
 
 function App() {
   const [data, setData] = useState()
@@ -23,22 +24,13 @@ function App() {
     getProducts();
   }, []);
 
-  const filterProducts = () =>{
-    return data.filter(product=>{
-      return (
-          (filters.category === 'all' || 
-          product.category === filters.category) &&
-          product.price >= filters.minPrice
-      )
-      
-  })
-  }
+  const filteredProducts = data ? filterProducts({data, filters}) : [];
 
 
   return (
     <>
       {category && <Header category={category} changeFilter={setFilters}/>}
-      {data && <ListProducts data={filterProducts()}/>}
+      {data && <ListProducts data={filteredProducts}/>}
     </>
   )
 }

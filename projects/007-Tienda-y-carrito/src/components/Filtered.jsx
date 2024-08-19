@@ -1,7 +1,5 @@
-import { useEffect } from "react";
-
-export function Filtered ({data}) {
-    const filterProducts = data.filter(product=>{
+export function filterProducts  ({data, filters}) {
+return data.filter(product=>{
     return (
         (filters.category === 'all' || 
         product.category === filters.category) &&
@@ -9,6 +7,5 @@ export function Filtered ({data}) {
     )
     
 })
-    return filterProducts
 }
 

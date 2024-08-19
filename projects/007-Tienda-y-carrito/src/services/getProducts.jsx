@@ -1,5 +1,3 @@
-import { useState, useEffect } from "react"
-
 const URL_PRODUCTS = 'https://api.escuelajs.co/api/v1/products'
 
 export const fetchProducts = async () => {
