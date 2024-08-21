@@ -8,6 +8,7 @@ function useGetProducts() {
 
     useEffect(() => {
         const getProducts = async () => {
+            setIsLoading(true)
             const products = await useFetchProducts();
             setData(products.listProducts);
             setCategory(products.category);

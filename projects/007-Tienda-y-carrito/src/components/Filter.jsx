@@ -6,7 +6,6 @@ export function Filter ({category, changeFilter}) {
     const [minPrice, setMinPrice] = useState(0)
     const [changeCategory, setChangeCategory] = useState('all')
 
-
     const handleMinPrice = (event) =>{
         const newMinPrice = event.target.value
         setMinPrice(newMinPrice)
@@ -16,7 +15,6 @@ export function Filter ({category, changeFilter}) {
         }))
     }
 
-
     const handleCategory = (event) =>{
         setChangeCategory(event.target.value)
         changeFilter(prevState =>({
@@ -24,7 +22,6 @@ export function Filter ({category, changeFilter}) {
             category: event.target.value
         }))
     }
-
 
     return(
         <section className="filters">

@@ -15,7 +15,7 @@ export const useFetchProducts = async () => {
             }));
             const category = [...new Set(listProducts.map(producto => 
                 producto.category))];
-
+                category.sort()
             return {listProducts, category}
         } catch (error) {
             return console.log('error')

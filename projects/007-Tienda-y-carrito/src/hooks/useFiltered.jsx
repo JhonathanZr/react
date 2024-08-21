@@ -1,6 +1,9 @@
-import { useEffect, useState } from "react"
+import { useContext } from "react"
+import { FilterContext } from "../context/FilterContext.jsx"
 
-export function useFiltered  ({data, filters}) {
+export function useFiltered  ({data}) {
+    const {filters} = useContext(FilterContext)
+    
     const filtered =  data.filter(product=>{
         return (
             (filters.category === 'all' || 

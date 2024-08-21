@@ -1,18 +1,17 @@
 import './App.css'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { ListProducts } from './components/products'
-import { useFetchProducts } from './services/useFetchProducts'
 import { Header } from './components/header'
 import { useFiltered } from './hooks/useFiltered'
 import useGetProducts from './hooks/useGetProducts'
+import { FilterContext } from './context/FilterContext'
 
 function App() {
-  const [filters, setFilters] = useState(
-    {    category: 'all',
-        minPrice: 0}
-)
 const { data, category, isLoading } = useGetProducts([])
-const {filtered} = data ? useFiltered({data, filters}) : [];
+const {filters, setFilters} = useContext(FilterContext)
+
+const {filtered} = data ? useFiltered({data}) : [];
+
 
 
   return (
