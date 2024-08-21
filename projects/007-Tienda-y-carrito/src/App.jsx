@@ -1,36 +1,30 @@
 import './App.css'
 import { useEffect, useState } from 'react'
 import { ListProducts } from './components/products'
-import { fetchProducts } from './services/getProducts'
+import { useFetchProducts } from './services/useFetchProducts'
 import { Header } from './components/header'
-import { filterProducts } from './components/Filtered'
+import { useFiltered } from './hooks/useFiltered'
+import useGetProducts from './hooks/useGetProducts'
 
 function App() {
-  const [data, setData] = useState()
-  const [category, setCategory] = useState()
-  const [filters, setFilters] = useState({
-    category: 'all',
-    minPrice: 0,
-  })
-
-  useEffect(() => {
-    const getProducts = async () => {
-        const produtcs = await fetchProducts();
-        const newProducts = produtcs.listProducts
-        const newCategory = produtcs.category
-        setCategory(newCategory)
-        setData(newProducts)
-    }
-    getProducts();
-  }, []);
-
-  const filteredProducts = data ? filterProducts({data, filters}) : [];
+  const [filters, setFilters] = useState(
+    {    category: 'all',
+        minPrice: 0}
+)
+const { data, category, isLoading } = useGetProducts([])
+const {filtered} = data ? useFiltered({data, filters}) : [];
 
 
   return (
     <>
-      {category && <Header category={category} changeFilter={setFilters}/>}
-      {data && <ListProducts data={filteredProducts}/>}
+    {isLoading ? <section></section> 
+    : <Header category={category} changeFilter={setFilters}/>
+      }
+      {
+        isLoading ? <p>Cargando...</p> 
+        :<ListProducts data={filtered}/>
+      }
+
     </>
   )
 }

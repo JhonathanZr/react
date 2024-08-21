@@ -18,7 +18,6 @@ export function Filter ({category, changeFilter}) {
 
 
     const handleCategory = (event) =>{
-        console.log(event.target.value)
         setChangeCategory(event.target.value)
         changeFilter(prevState =>({
             ...prevState,
