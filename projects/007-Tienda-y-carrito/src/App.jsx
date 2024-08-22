@@ -1,5 +1,5 @@
 import './App.css'
-import { useContext, useEffect, useState } from 'react'
+import { useContext} from 'react'
 import { ListProducts } from './components/products'
 import { Header } from './components/header'
 import { useFiltered } from './hooks/useFiltered'
@@ -7,11 +7,9 @@ import useGetProducts from './hooks/useGetProducts'
 import { FilterContext } from './context/FilterContext'
 
 function App() {
-const { data, category, isLoading } = useGetProducts([])
-const {filters, setFilters} = useContext(FilterContext)
-
-const {filtered} = data ? useFiltered({data}) : [];
-
+const {setFilters} = useContext(FilterContext)
+const {category} = useGetProducts([])
+const {filtered, isLoading} = useFiltered();
 
 
   return (

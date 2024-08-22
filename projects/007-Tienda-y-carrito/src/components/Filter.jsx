@@ -1,27 +1,28 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import './filters.css'
-import debounce from "just-debounce-it";
+import { FilterContext } from "../context/FilterContext.jsx"
+
+
 
 export function Filter ({category, changeFilter}) {
-    const [minPrice, setMinPrice] = useState(0)
-    const [changeCategory, setChangeCategory] = useState('all')
+    const {filters, setFilters} = useContext(FilterContext)
 
     const handleMinPrice = (event) =>{
         const newMinPrice = event.target.value
-        setMinPrice(newMinPrice)
-        changeFilter(prevState => ({
+        setFilters(prevState => ({
             ...prevState,
             minPrice: newMinPrice
         }))
     }
 
+
     const handleCategory = (event) =>{
-        setChangeCategory(event.target.value)
-        changeFilter(prevState =>({
+        setFilters(prevState =>({
             ...prevState,
             category: event.target.value
         }))
     }
+
 
     return(
         <section className="filters">
@@ -32,8 +33,9 @@ export function Filter ({category, changeFilter}) {
                 id="price"
                 min='0'
                 max='500'
+                value={filters.minPrice}
                 onChange={handleMinPrice}/>
-                <span>${minPrice}</span>
+                <span>${filters.minPrice}</span>
             </div>
             
             <div>

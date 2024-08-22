@@ -4,7 +4,6 @@ import { createContext, useState } from "react";
 export const FilterContext = createContext()
 
 //2. Creas el Provider // Este proveerá
-
 export function FilterProvider ({children}){
     const [filters, setFilters] = useState(
         {    category: 'all',

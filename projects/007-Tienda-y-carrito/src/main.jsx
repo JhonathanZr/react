@@ -6,5 +6,5 @@ import { FilterProvider } from './context/FilterContext.jsx'
 createRoot(document.getElementById('root')).render(
   <FilterProvider>
     <App />
-  </FilterProvider>,
+  </FilterProvider>
 )
