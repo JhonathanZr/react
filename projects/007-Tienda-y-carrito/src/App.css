@@ -34,3 +34,11 @@ ul{
     gap: 10px;
     margin: 0px;
 }
+
+.add{
+    background-color: #32c75f
+}
+
+.remove{
+    background-color: red;
+}

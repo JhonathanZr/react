@@ -1,13 +1,19 @@
-import {AddToCartIcon} from './icons'
+import {AddToCartIcon, RemoveFromCartIcon} from './icons'
+import { useCart } from '../hooks/useCart'
 
 export function ListProducts ({data}) {
-    
+    const {addToCart, cart, removeFromCart} = useCart()
+    const checkProductInCart = data => {
+        return cart.some(item => item.id === data.id)
+    }
     return(
         <main>
             <ul>
                 {
-                    data?.map(data=>(
-                        <li className='contain-products' key={data.id}>
+                    data?.map(data=>{
+                        const isProductInCart = checkProductInCart(data)
+                        return(
+                            <li className='contain-products' key={data.id}>
                             <img className='img-products' src={data.image}
                             alt={data.description}/>
                             <div>
@@ -17,10 +23,20 @@ export function ListProducts ({data}) {
                             <p>{data.price}$</p>
                             </div>
                             <div>
-                                <button><AddToCartIcon/></button>
+                                <button 
+                                className={isProductInCart ? 'remove' : 'add'}
+                                onClick={() => isProductInCart 
+                                ? removeFromCart(data)
+                                : addToCart(data)}>
+                                    {isProductInCart
+                                    ?   <RemoveFromCartIcon/>
+                                    :   <AddToCartIcon/>}
+                                    </button>
                             </div>
                         </li>
-                    ))
+                        )
+
+                    })
                 }
             </ul>
         </main>
