@@ -4,14 +4,14 @@ import { ClearCartIcon, RemoveFromCartIcon, CartIcon } from './icons'
 import { useCart } from '../hooks/useCart'
 
 export function Cart() {
-    const cardCheckBoxID = useId()
+    const cartCheckboxId = useId()
     const { cart, addToCart, subtractionFromCart, clearCart } = useCart()
     return (
         <>
-            <label className='cart-button' htmlFor={cardCheckBoxID}>
+            <label className='cart-button' htmlFor={cartCheckboxId}>
                 <CartIcon />
             </label>
-            <input id={cardCheckBoxID} type='checkbox' hidden />
+            <input id={cartCheckboxId} type='checkbox' hidden />
             <aside className='cart'>
                 <button onClick={() =>{clearCart()}}><ClearCartIcon/></button>
                 <ul>
